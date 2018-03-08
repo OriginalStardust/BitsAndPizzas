@@ -1,12 +1,16 @@
 package com.example.bitsandpizzas;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends Activity {
+
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,9 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        this.setIntent("This is example text");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -32,5 +39,12 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setIntent(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        shareActionProvider.setShareIntent(intent);
     }
 }
