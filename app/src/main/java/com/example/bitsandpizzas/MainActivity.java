@@ -172,7 +172,7 @@ public class MainActivity extends Activity {
         }
         FragmentTransaction ft = this.getFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment, "visible_fragment");
-        ft.addToBackStack(null);
+//        ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
         this.setActionBarTitle(position);
